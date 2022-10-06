@@ -4,9 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
 <body>
-    
+    <header class="container-fluid p-3 text-center">
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main class="container-fluid row">
+        <aside class="col-3">
+            <h2>Search for a City:</h2>
+            <form action="submit" class="search-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Denver" id="search-input" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-control">Search</button>
+                </div>
+            </form>
+            <hr class="hr">
+            <section class="previous-cities">
+                <!-- Insert search history here -->
+            </section>
+        </aside>
+        <section class="col-9">
+            <div class="card current-weather">
+                <!-- insert current weather data -->
+            </div>
+            <div class="row 5-days">
+                <!-- insert 5 days forecast -->
+            </div>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>

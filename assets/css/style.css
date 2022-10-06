@@ -1,0 +1,12 @@
+header {
+    background: linear-gradient(to left, #20084a, #3463bc);
+}
+
+.btn {
+    color: rgb(232, 232, 232);
+}
+
+hr {
+    border-width: 2px;
+    border-color: lightgray;
+}
