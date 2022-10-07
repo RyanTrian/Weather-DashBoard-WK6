@@ -7,6 +7,15 @@ var currentWeather = $(".current-weather");
 var forecast5 = $(".five-days");
 
 //
+function curentConditions(data) {
+    let lat = data[0].lat;
+    let lon = data[0].lon;
+    
+    
+  }
+function futureConditions(data) {
+  
+  }
 
 function showWeather() {
   // get the city's name, store it in a variable
@@ -16,21 +25,13 @@ function showWeather() {
   let geoCodingAPI =
     "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + APIkey;
 
-  function currentWeather(data) {
-    let la = data[0].lat;
-    let lon = data[0].lon;
-  }
-  function forecast5(data) {
-    
-  }
-
   fetch(geoCodingAPI)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      currentWeather(data);
-      forecast5(data);
+      curentConditions(data);
+      futureConditions(data);
     });
 }
 
