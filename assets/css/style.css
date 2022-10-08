@@ -10,3 +10,7 @@ hr {
     border-width: 2px;
     border-color: lightgray;
 }
+
+h2 {
+    float: left;
+}
