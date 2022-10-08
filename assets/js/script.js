@@ -81,7 +81,7 @@ function futureConditions(coord) {
       for (var i = 5; i < 38; i += 8) {
         // Create a div for each forecast card
         var weatherCard = $("<div>").attr("class",
-          "col five-days bg-secondary text-white rounded-lg p-2"
+          "col five-days text-white rounded-lg p-2"
         );
         // variables
         var list = data.list[i];
@@ -108,6 +108,9 @@ function futureConditions(coord) {
 }
 
 function showWeather() {
+  // Clear existing search results
+  currentWeather.empty(); 
+  forecast5.empty();
   // get the city's name, store it in a variable
   let cityName = searchInput.val();
   searchInput.val("");

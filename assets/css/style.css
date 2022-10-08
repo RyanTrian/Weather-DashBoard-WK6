@@ -15,7 +15,11 @@ h2 {
   float: left;
 }
 
+#today-container {
+    border-width: 2px;
+}
+
 .five-days {
-  background-color: var(--weaterh-card-color);
+  background-color: rgb(27, 27, 59);
   margin: 15px;
 }
