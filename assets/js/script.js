@@ -5,7 +5,7 @@ var submitBtn = $("#submit-btn");
 var citiesList = $(".previous-cities");
 var todayContainer = $("#today-container");
 var currentWeather = $(".current-weather");
-var forecast5 = $(".five-days");
+var forecast5 = $(".forecast-container");
 
 //fetch data from current weather api, and display desired data on the page
 function curentConditions(coord) {
@@ -42,24 +42,24 @@ function curentConditions(coord) {
       var city = data.name;
       var date = moment().format(" MM/DD/YYYY");
       // weather condition icon
-      var weathericon = data.weather[0].icon;
-      var urlicon = "http://openweathermap.org/img/w/" + weathericon + ".png";
-      var cityheader = $("<h2>").html(city + date);
+      var weatherIcon = data.weather[0].icon;
+      var urlIcon = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
+      var cityHeader = $("<h2>").html(city + date);
       todayContainer.addClass("card");
       currentWeather.addClass("card-body");
-      currentWeather.prepend(cityheader);
-      currentWeather.append($("<img>").attr("src", urlicon));
+      currentWeather.prepend(cityHeader);
+      currentWeather.append($("<img>").attr("src", urlIcon));
       // temp, feels like, humidity, windspeed
       var temp = Math.ceil(data.main.temp);
       currentWeather.append($("<p>").html("Temperature: " + temp + " &#8457"));
-      var feelsliketemp = Math.ceil(data.main.feels_like);
+      var feelsLike = Math.ceil(data.main.feels_like);
       currentWeather.append(
-        $("<p>").html("Feels Like: " + feelsliketemp + " &#8457")
+        $("<p>").html("Feels Like: " + feelsLike + " &#8457")
       );
       var humidity = data.main.humidity + "&#37;";
-      currentWeather.append($("<p>").html("Humidity: " + humidity));
-      var windspeed = data.wind.speed;
-      currentWeather.append($("<p>").html("Wind Speed: " + windspeed + " MPH"));
+      currentWeather.append($("<p>").html("Humidity: " + humidity + "%"));
+      var windSpeed = data.wind.speed;
+      currentWeather.append($("<p>").html("Wind Speed: " + windSpeed + " MPH"));
       // can add a UVindex function here, but the OneCall API requires having a subcription to use.
       // Though it's free for 1000call/day, I don't like having my API key on Github.
       // EX(checkout the declared function). uvIndex();
@@ -78,6 +78,32 @@ function futureConditions(coord) {
     })
     .then(function (data) {
       
+      for (var i = 5; i < 38; i += 8) {
+        // Create a div for each forecast card
+        var weatherCard = $("<div>").attr("class",
+          "col five-days bg-secondary text-white rounded-lg p-2"
+        );
+        // variables
+        var list = data.list[i];
+        var main = data.list[i].main;
+        forecast5.append(weatherCard);
+        // Get the date and format using momentJs
+        cardDate = moment(list.dt_txt.split(' ')[0]).format('l');
+        // Display Date
+        weatherCard.append($("<h4>").html(cardDate));
+        // Display Icon
+        var iconCode = list.weather[0].icon;
+        var urlIcon =
+          `http://openweathermap.org/img/w/${iconCode}.png`;
+        weatherCard.append($("<img>").attr("src", urlIcon));
+        // display temp, windspeed, and humidity
+        var temp = Math.ceil(main.temp);
+        weatherCard.append($("<p>").html("Temp: " + temp + " &#8457"));
+        var windSpeed = list.wind.speed
+        weatherCard.append($("<p>").html("Wind Speed: " + windSpeed + "MPH"))
+        var humidity = main.humidity;
+        weatherCard.append($("<p>").html("Humidity: " + humidity + "%"));
+      }
     });
 }
 
