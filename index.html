@@ -12,7 +12,7 @@
     <header class="container-fluid p-3 text-center">
         <h1>Weather Dashboard</h1>
     </header>
-    <main class="container-fluid row">
+    <main class="container-fluid row mt-3">
         <aside class="col-3">
             <h2>Search for a City:</h2>
             <form action="submit" class="search-form">
@@ -29,8 +29,10 @@
             </section>
         </aside>
         <section class="col-9">
-            <div class="card current-weather">
-                <!-- insert current weather data -->
+            <div id="today-container">
+                <div class="current-weather">
+                    <!-- insert current weather data -->
+                </div>
             </div>
             <div class="row five-days">
                 <!-- insert 5 days forecast -->
