@@ -18,6 +18,14 @@ h2 {
 #today-container {
     border-width: 2px;
 }
+.btn-block+.btn-block {
+    margin-top: 0;
+}
+
+.cityBtn {
+    margin-bottom: 3px;
+    border-radius: 5px;
+}
 
 .five-days {
   background-color: rgb(27, 27, 59);

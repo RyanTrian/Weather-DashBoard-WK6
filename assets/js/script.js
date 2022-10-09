@@ -6,6 +6,7 @@ var citiesList = $(".previous-cities");
 var todayContainer = $("#today-container");
 var currentWeather = $(".current-weather");
 var forecast5 = $(".forecast-container");
+var cityHistory = [];
 
 //fetch data from current weather api, and display desired data on the page
 function curentConditions(coord) {
@@ -56,8 +57,8 @@ function curentConditions(coord) {
       currentWeather.append(
         $("<p>").html("Feels Like: " + feelsLike + " &#8457")
       );
-      var humidity = data.main.humidity + "&#37;";
-      currentWeather.append($("<p>").html("Humidity: " + humidity + "%"));
+      var humidity = data.main.humidity;
+      currentWeather.append($("<p>").html("Humidity: " + humidity + " %"));
       var windSpeed = data.wind.speed;
       currentWeather.append($("<p>").html("Wind Speed: " + windSpeed + " MPH"));
       // can add a UVindex function here, but the OneCall API requires having a subcription to use.
@@ -93,16 +94,15 @@ function futureConditions(coord) {
         weatherCard.append($("<h4>").html(cardDate));
         // Display Icon
         var iconCode = list.weather[0].icon;
-        var urlIcon =
-          `http://openweathermap.org/img/w/${iconCode}.png`;
+        var urlIcon =`http://openweathermap.org/img/w/${iconCode}.png`;
         weatherCard.append($("<img>").attr("src", urlIcon));
         // display temp, windspeed, and humidity
         var temp = Math.ceil(main.temp);
         weatherCard.append($("<p>").html("Temp: " + temp + " &#8457"));
         var windSpeed = list.wind.speed
-        weatherCard.append($("<p>").html("Wind Speed: " + windSpeed + "MPH"))
+        weatherCard.append($("<p>").html("Wind Speed: " + windSpeed + " MPH"))
         var humidity = main.humidity;
-        weatherCard.append($("<p>").html("Humidity: " + humidity + "%"));
+        weatherCard.append($("<p>").html("Humidity: " + humidity + " %"));
       }
     });
 }
@@ -113,6 +113,8 @@ function showWeather() {
   forecast5.empty();
   // get the city's name, store it in a variable
   let cityName = searchInput.val();
+  saveCityList(cityName);
+
   searchInput.val("");
   // fetch lat and lon
   let geoCodingAPI =
@@ -127,5 +129,40 @@ function showWeather() {
       futureConditions(data);
     });
 }
+// Render list of previous search input onto the page
+function renderCities() {
+  var savedCity = JSON.parse(localStorage.getItem("cityHistory"));
+  if (savedCity !== null) {
+    cityHistory = savedCity;
+    for (let i = 0; i < cityHistory.length; i++) {
+      if (i === 4) {
+        break;
+      }
+      let cityBtn = $('<button>').attr("class", "btn btn-secondary btn-block cityBtn");
+      cityBtn.text(cityHistory[i]);
+      citiesList.append(cityBtn);
+    }
+  }
+}
+
+// Save new Input into local storage 
+function saveCityList(cityName) {
+  let checkHistory = cityHistory.includes(cityName);
+  if (!checkHistory && cityName !== '') {
+    cityHistory.unshift(cityName);
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
+    citiesList.empty();
+    renderCities();
+  }
+}
+
+renderCities();
 
 submitBtn.on("click", showWeather);
+
+$(".cityBtn").on("click",function(event){
+  var clickCity = event.target.innerText;
+  $("#search-input").val(clickCity);
+  showWeather(clickCity);
+ 
+ });
