@@ -135,6 +135,7 @@ function renderCities() {
   if (savedCity !== null) {
     cityHistory = savedCity;
     for (let i = 0; i < cityHistory.length; i++) {
+      // render no more than 5 searches
       if (i === 4) {
         break;
       }
@@ -164,5 +165,4 @@ $(".cityBtn").on("click",function(event){
   var clickCity = event.target.innerText;
   $("#search-input").val(clickCity);
   showWeather(clickCity);
- 
  });
