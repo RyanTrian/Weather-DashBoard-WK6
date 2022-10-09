@@ -44,7 +44,7 @@ function curentConditions(coord) {
       var date = moment().format(" MM/DD/YYYY");
       // weather condition icon
       var weatherIcon = data.weather[0].icon;
-      var urlIcon = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
+      var urlIcon = "https://openweathermap.org/img/w/" + weatherIcon + ".png";
       var cityHeader = $("<h2>").html(city + date);
       todayContainer.addClass("card");
       currentWeather.addClass("card-body");
@@ -94,7 +94,7 @@ function futureConditions(coord) {
         weatherCard.append($("<h4>").html(cardDate));
         // Display Icon
         var iconCode = list.weather[0].icon;
-        var urlIcon =`http://openweathermap.org/img/w/${iconCode}.png`;
+        var urlIcon =`https://openweathermap.org/img/w/${iconCode}.png`;
         weatherCard.append($("<img>").attr("src", urlIcon));
         // display temp, windspeed, and humidity
         var temp = Math.ceil(main.temp);
@@ -118,7 +118,7 @@ function showWeather() {
   searchInput.val("");
   // fetch lat and lon
   let geoCodingAPI =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + APIkey;
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + APIkey;
 
   fetch(geoCodingAPI)
     .then(function (response) {
