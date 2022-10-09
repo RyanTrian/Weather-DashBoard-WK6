@@ -159,10 +159,12 @@ function saveCityList(cityName) {
 
 renderCities();
 
+// search Button, click event
 submitBtn.on("click", showWeather);
 
+// Search history buttons, click event
 $(".cityBtn").on("click",function(event){
   var clickCity = event.target.innerText;
   $("#search-input").val(clickCity);
-  showWeather(clickCity);
+  showWeather();
  });
